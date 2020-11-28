@@ -1,7 +1,5 @@
 #include"Header.h"
 
-// https://leetcode.com/problems/add-two-numbers/
-
 struct node
 {
 	int value;
@@ -39,7 +37,6 @@ int main()
 		}
 	}
 
-
 	while (1)  //bulid a queue as list2
 	{
 		scanf("%d", &input);
@@ -62,7 +59,7 @@ int main()
 	}
 
 	overflow = 0;
-	while (list1 || list2)  //build new stack
+	while (list1 || list2)  //compute and build a stack
 	{
 		newNode = (struct node*)malloc(sizeof(struct node));
 		newNode->next = NULL;
