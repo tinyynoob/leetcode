@@ -23,10 +23,8 @@
     <ClCompile Include="main.c">
       <Filter>來源檔案</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="problemURL.txt">
+    <ClCompile Include="submit.c">
       <Filter>來源檔案</Filter>
-    </Text>
+    </ClCompile>
   </ItemGroup>
 </Project>
