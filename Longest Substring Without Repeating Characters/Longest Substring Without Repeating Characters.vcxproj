@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="submit.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />

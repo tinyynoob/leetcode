@@ -1,4 +1,4 @@
-#include"Header.h"
+#include"string.h"
 
 struct block
 {
@@ -7,47 +7,45 @@ struct block
 	struct block* next;
 };
 
-void* rearrange(struct block*,char);
+void* rearrange(struct block*, char);
 
-void main()
+int lengthOfLongestSubstring(char* s)
 {
-	int max = 0, indicator = 0,flag,i;
-	char s[50000],Str[1000]; //s is the input string 
-	struct block* p=NULL,*last=NULL,*newBlock=NULL,*head=NULL,*k=NULL;
-	gets(s);
-	//puts(s);
-	
+	int max = 0, indicator = 0, flag, i;
+	char Str[250];
+	struct block* p = NULL, * last = NULL, * newBlock = NULL, * head = NULL, * k = NULL;
+
+
 	/*	queue structure is used	*/
-	while (indicator<strlen(s))
+	while (indicator < strlen(s))
 	{
 		newBlock = malloc(sizeof(struct block));
 		newBlock->next = NULL;
 		newBlock->ch = s[indicator];
+		strcpy(Str, (char[2]) { (char)newBlock->ch, '\0' });
 		if (!head)
 		{
 			newBlock->count = 1;
-			strcpy(Str, (char[2]){(char)newBlock->ch,'\0'});
 			head = newBlock;
 		}
 		else
 		{
 			flag = 0;	// flag=0 represents that no repeat is found
-			newBlock->count = last->count+1;
-			strcpy(Str, strcat(Str, (char[2]){(char)newBlock->ch,'\0'}) );
+			newBlock->count = last->count + 1;
 			//puts(Str);
 
-			for (p = head;p; p = p->next)	//scan the previous queue
+			for (p = head; p; p = p->next)	//scan the previous queue
 			{
 				if (p->ch == newBlock->ch)	//if a repeat is found
 				{
-					if( (newBlock->count)-(p->count) > max )	//update max
-						max = (newBlock->count)-(p->count);
-					head=rearrange(head, p->ch);	//modify the head of the linked list
-					
-					/*	recount and reconstruct Str	*/
+					if ((newBlock->count) - (p->count) > max)	//update max
+						max = (newBlock->count) - (p->count);
+					head = rearrange(head, p->ch);	//modify the head of the linked list
+
+					/*	recount and reconstruct the string	*/
 					i = 1;
-					strcpy(Str, (char[1]) {'\0'});	//clear Str
-					for (k=head ;k; k=k->next)	
+					strcpy(Str, (char[1]) { '\0' });	//clear Str
+					for (k = head; k; k = k->next)
 					{
 						k->count = i;
 						strcpy(Str, strcat(Str, (char[2]) { (char)k->ch, '\0' }));
@@ -70,22 +68,18 @@ void main()
 				last->next = newBlock;
 		}
 
-		printf("%s\n", Str);
-		last=newBlock;
-		if(newBlock->count >max)
+		last = newBlock;
+		if (newBlock->count > max)
 			max = newBlock->count;
 		indicator++;
 	}
 
-	printf("%d\n",max);
-
-	system("pause");
-	return;
+	return max;
 }
 
 void* rearrange(struct block* head, char target)
 {
-	struct block* p=NULL ,*p2=NULL;
+	struct block* p = NULL, * p2 = NULL;
 	int found = 0;
 	for (p = head; p; p = p2)
 	{
